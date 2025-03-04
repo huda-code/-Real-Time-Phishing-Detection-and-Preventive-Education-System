@@ -23,15 +23,28 @@ phishing-related risks. This research provides a practical solution for staying 
 increasingly digital world
 
 How This Works:
+
 The script trains a Naïve Bayes classifier on a small dataset of phishing and legitimate emails.
+
 It saves the trained model and vectorizer using joblib for real-time usage.
+
 The phishing_alert() function:
+
 Loads the trained model.
+
 Processes the email input.
+
 Detects whether it's phishing or legitimate.
+
 If phishing is detected, it provides security tips for user education.
+
 Next Steps to Improve This Model:
+
 ✅ Use a larger dataset for improved accuracy.
+
 ✅ Integrate with email scanning services (IMAP/SMTP APIs) for real-time analysis.
+
 ✅ Add URL inspection for suspicious links using re (regex).
+
 ✅ Implement machine learning enhancements (e.g., deep learning with LSTMs for textual analysis).
+
