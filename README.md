@@ -2,9 +2,13 @@
 
 
 Hajira Sultana
+
 Lewis University
+
 Romeoville, IL 60446
+
 Title: Real-Time Phishing Detection and Preventive Education System
+
 Abstract:
 Phishing attacks trick people into revealing sensitive information like passwords and financial details,
 leading to major security risks. Many users fall victim to these scams because they don’t know how
