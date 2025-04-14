@@ -1,57 +1,69 @@
-import re
-import joblib
 import pandas as pd
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.model_selection import train_test_split
+import tkinter as tk
+from tkinter import messagebox
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.ensemble import RandomForestClassifier
 
-# Sample phishing and legitimate email dataset (replace with actual dataset)
-data = {
-    "email_text": [
-        "Your account has been compromised, please reset your password immediately using this link.",
-        "Congratulations! You have won a lottery of $1,000,000. Click here to claim.",
-        "Dear user, your bank has detected suspicious activity. Click the link below to verify your identity.",
-        "Hello, please find the attached document as per our discussion.",
-        "Reminder: Your payment is due next week. Visit your dashboard for details."
-    ],
-    "label": [1, 1, 1, 0, 0]  # 1 = Phishing, 0 = Legitimate
-}
+# -------------------------
+# STEP 1: Load and preprocess the dataset
+# -------------------------
+try:
+    df = pd.read_csv("Phishing_Email.csv").dropna()
+except FileNotFoundError:
+    print("❌ ERROR: 'Phishing_Email.csv' not found in the directory.")
+    exit()
 
-# Load dataset into DataFrame
-df = pd.DataFrame(data)
+df = df[df['Email Type'].isin(["Safe Email", "Phishing Email"])]  # Clean only valid labels
 
-# Feature extraction
-vectorizer = CountVectorizer()
-X = vectorizer.fit_transform(df['email_text'])
-y = df['label']
+X = df["Email Text"]
+y = df["Email Type"]
 
-# Train the model
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-model = MultinomialNB()
-model.fit(X_train, y_train)
+# -------------------------
+# STEP 2: Vectorize and train model
+# -------------------------
+vectorizer = TfidfVectorizer()
+X_vect = vectorizer.fit_transform(X)
 
-# Save model and vectorizer for real-time usage
-joblib.dump(model, "phishing_detector.pkl")
-joblib.dump(vectorizer, "vectorizer.pkl")
+model = RandomForestClassifier(n_estimators=10)
+model.fit(X_vect, y)
 
-# Educational component
-def phishing_alert(email_text):
-    model = joblib.load("phishing_detector.pkl")
-    vectorizer = joblib.load("vectorizer.pkl")
+# -------------------------
+# STEP 3: GUI logic
+# -------------------------
+def analyze_email():
+    email_text = entry.get("1.0", tk.END).strip()
+    if not email_text:
+        messagebox.showinfo("Input Required", "Please enter email text to analyze.")
+        return
 
-    email_vectorized = vectorizer.transform([email_text])
-    prediction = model.predict(email_vectorized)[0]
+    email_vect = vectorizer.transform([email_text])
+    prediction = model.predict(email_vect)[0]
 
-    if prediction == 1:
-        print("\n⚠ **Warning: Potential Phishing Email Detected!** ⚠")
-        print(" **Security Tips:**")
-        print("   - Do not click on suspicious links.")
-        print("   - Verify sender details before responding.")
-        print("   - Never share personal or financial information via email.")
-        print("   - Report phishing emails to IT security.")
+    if prediction == "Phishing Email":
+        messagebox.showwarning(
+            "⚠️ Warning: Phishing Email Detected",
+            "⚠ This looks like a phishing email!\n\n💡 Tips:\n"
+            "- Do NOT click suspicious links\n"
+            "- Verify the sender\n"
+            "- Report to IT/security team"
+        )
     else:
-        print("\n This email appears to be legitimate.")
+        messagebox.showinfo("✅ Safe Email", "This email appears to be safe.")
 
-# Test real-time detection
-test_email = input("\n Enter an email text to analyze: ")
-phishing_alert(test_email)
+# -------------------------
+# STEP 4: GUI layout
+# -------------------------
+root = tk.Tk()
+root.title("Phishing Email Detector")
+root.geometry("650x450")
+
+label = tk.Label(root, text="Enter email content below:", font=("Arial", 12))
+label.pack(pady=10)
+
+entry = tk.Text(root, height=12, width=70, font=("Courier New", 10))
+entry.pack(pady=10)
+
+btn = tk.Button(root, text="Analyze Email", font=("Arial", 11, "bold"), bg="#4CAF50", fg="white", command=analyze_email)
+btn.pack(pady=10)
+
+root.mainloop()

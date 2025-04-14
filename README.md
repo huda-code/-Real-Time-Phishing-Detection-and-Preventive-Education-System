@@ -1,50 +1,77 @@
-# -Real-Time-Phishing-Detection-and-Preventive-Education-System
+# 📧 Real-Time Phishing Email Detector
 
+A real-time desktop application that detects phishing emails using machine learning and provides educational tips to help users avoid falling for scams.
 
-Hajira Sultana
+---
 
-Lewis University
+## 🔍 Features
 
-Romeoville, IL 60446
+- ✅ Detects phishing emails with high accuracy  
+- 💬 Simple GUI for input and feedback  
+- 💡 Safety tips included for awareness  
+- 🧠 Trained on real-world phishing and safe emails  
+- 🚫 Works completely offline  
 
-Title: Real-Time Phishing Detection and Preventive Education System
+---
 
-Abstract:
-Phishing attacks trick people into revealing sensitive information like passwords and financial details,
-leading to major security risks. Many users fall victim to these scams because they don’t know how
-to recognize them or don’t have tools to detect them. This project introduces a Real-Time Phishing
-Detection and Preventive Education System, which helps users identify phishing threats
-instantly while teaching them how to avoid future attacks. The system will use smart technology
-to scan emails, links, and messages for suspicious signs and provide immediate alerts. Additionally,
-an interactive learning feature will guide users through real-world phishing scenarios, helping
-them build skills to recognize scams before they become victims. By combining real-time security
-with preventive education, this system aims to strengthen cybersecurity awareness and reduce
-phishing-related risks. This research provides a practical solution for staying safe online in an
-increasingly digital world
+## 📁 Project Structure
 
-How This Works:
+Phishing-Email-Detector/  
+├── main.py               → Application code (GUI + model)  
+├── Phishing_Email.csv    → Dataset used for real-time training  
+├── requirements.txt      → Python dependencies  
+└── README.md             → Project overview and usage guide  
 
-The script trains a Naïve Bayes classifier on a small dataset of phishing and legitimate emails.
+---
 
-It saves the trained model and vectorizer using joblib for real-time usage.
+## ▶️ How to Run
 
-The phishing_alert() function:
+### Prerequisites
 
-Loads the trained model.
+- Python 3.7 or later  
+- (Optional) Virtual environment
 
-Processes the email input.
+### Steps
 
-Detects whether it's phishing or legitimate.
+1. Clone or download the project folder:  
+   git clone https://github.com/your-username/Phishing-Email-Detector.git  
+   cd Phishing-Email-Detector
 
-If phishing is detected, it provides security tips for user education.
+2. (Optional) Create and activate a virtual environment:  
+   python -m venv env  
+   source env/bin/activate          (For Windows: env\Scripts\activate)
 
-Next Steps to Improve This Model:
+3. Install required packages:  
+   pip install -r requirements.txt
 
-✅ Use a larger dataset for improved accuracy.
+4. Run the application:  
+   python main.py
 
-✅ Integrate with email scanning services (IMAP/SMTP APIs) for real-time analysis.
+---
 
-✅ Add URL inspection for suspicious links using re (regex).
+## 🧪 Example Email to Test
 
-✅ Implement machine learning enhancements (e.g., deep learning with LSTMs for textual analysis).
+Dear Customer,  
+We have noticed suspicious activity on your account.  
+Please verify immediately at: http://secure-login-update.com  
+Thank you,  
+Bank Security Team
 
+→ The app will alert you with a phishing warning and show safety tips.
+
+---
+
+## 👩‍💻 Author
+
+**Hajira Sultana**  
+Cybersecurity Graduate Student, Lewis University  
+📫 hajirasultana.cyber@gmail.com
+
+---
+
+## 📜 License
+
+This project is intended for academic and educational use only.  
+All rights reserved © 2025 Hajira Sultana.
+📧 code.huda@gmail.com
+hajirasultana@lewisu.edu
