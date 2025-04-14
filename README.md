@@ -65,7 +65,7 @@ Bank Security Team
 
 **Hajira Sultana**  
 Cybersecurity Graduate Student, Lewis University  
-📫 hajirasultana.cyber@gmail.com
+📫 code.huda@gmail.com
 
 ---
 
