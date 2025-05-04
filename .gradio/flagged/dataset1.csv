@@ -1,0 +1,17 @@
+email_text,output,timestamp
+"'Hi Sarah,
+
+Just a reminder that our project meeting is tomorrow at 10 AM.  
+Let me know if you want to adjust the agenda.
+
+Best,  
+James
+",✅ This email appears to be safe.,2025-05-04 15:25:12.227619
+"Congratulations!
+
+You’ve won a $1,000 Amazon gift card.  
+Click here to claim your prize:  
+http://amazon-rewards-fake.com
+
+Act fast — limited time offer!
+",⚠️ Warning: This looks like a phishing email!,2025-05-04 15:25:21.103682
